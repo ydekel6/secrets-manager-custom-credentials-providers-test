@@ -32,7 +32,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Manage semantic versioning
+      - name: jfrog GO Version
         uses: paulhatch/semantic-version@v5.4.0
         id: calculate_tag_version
         with:
@@ -45,13 +45,26 @@ jobs:
           search_commit_body: true
           debug: true
 
+      - name: jfrog NODEJS Version
+        uses: paulhatch/semantic-version@v5.4.0
+        id: calculate_tag_version
+        with:
+          tag_prefix: "jfrog-artifactory-provider-node-"
+          major_pattern: "[MAJOR]"
+          minor_pattern: "[MINOR]"
+          version_format: "${major}.${minor}.${patch}"
+          change_path: "jfrog-artifactory-provider-node"
+          bump_each_commit: false
+          search_commit_body: true
+          debug: true
+
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           custom_tag: ${{ steps.calculate_tag_version.outputs.version_tag }}
-          tag_prefix: "jfrog-artifactory-provider-go-"
+          tag_prefix: "v"
 
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1.14.0
