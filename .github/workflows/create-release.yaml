@@ -51,7 +51,7 @@ jobs:
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           custom_tag: ${{ steps.calculate_tag_version.outputs.version_tag }}
-          tag_prefix: "v"
+#          tag_prefix: ""
 
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1.14.0
