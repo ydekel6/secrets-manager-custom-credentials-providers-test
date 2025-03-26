@@ -32,28 +32,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: jfrog GO Version
+      - name: Providers Version
         uses: paulhatch/semantic-version@v5.4.0
         id: calculate_tag_version
         with:
-          tag_prefix: "jfrog-artifactory-provider-go-"
+          tag_prefix: "v"
           major_pattern: "[MAJOR]"
           minor_pattern: "[MINOR]"
           version_format: "${major}.${minor}.${patch}"
-          change_path: "jfrog-artifactory-provider-go"
-          bump_each_commit: false
-          search_commit_body: true
-          debug: true
-
-      - name: jfrog NODEJS Version
-        uses: paulhatch/semantic-version@v5.4.0
-        id: calculate_tag_version
-        with:
-          tag_prefix: "jfrog-artifactory-provider-node-"
-          major_pattern: "[MAJOR]"
-          minor_pattern: "[MINOR]"
-          version_format: "${major}.${minor}.${patch}"
-          change_path: "jfrog-artifactory-provider-node"
+          change_path: "*provider*"
           bump_each_commit: false
           search_commit_body: true
           debug: true
